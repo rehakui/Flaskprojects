@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request
 
 app = Flask(__name__)
 
@@ -13,5 +13,15 @@ def about():
 @app.route("/user/<name>")
 def user(name):
     return f"Hello, {name}"
+
+@app.route("/login", methods=["POST"])
+def login():
+    data = request.json
+    return {"you_sent": data}
+
+@app.route("/search")
+def search():
+    keyword = request.args.get("q")
+    return f"search: {keyword}"
 
 app.run(debug=True)
