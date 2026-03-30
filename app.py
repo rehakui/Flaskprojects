@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, render_template
 
 app = Flask(__name__)
 
@@ -53,10 +53,22 @@ def about():
 def user(name):
     return f"Hello, {name}"
 
+@app.route("/login", methods=["GET"])
+def login_page():
+    return render_template("login.html")
+
+# API(JSON) curlにてlogin
+# @app.route("/login", methods=["POST"])
+# def login():
+#     data = request.json
+#     return {"you_sent": data}
+
+# Webページ(HTML) htmlフォームにてlogin
 @app.route("/login", methods=["POST"])
 def login():
-    data = request.json
-    return {"you_sent": data}
+    name = request.form.get("name")
+    return f"<h1>Hello {name}</h1>"
+
 
 @app.route("/search")
 def search():
