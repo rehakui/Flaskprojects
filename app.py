@@ -67,7 +67,8 @@ def login_page():
 @app.route("/login", methods=["POST"])
 def login():
     name = request.form.get("name")
-    return f"<h1>Hello {name}</h1>"
+    return (f"<h1>Hello {name}.<br>"
+            f"Nice to meet you.</h1>")
 
 
 @app.route("/search")
